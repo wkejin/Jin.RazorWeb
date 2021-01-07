@@ -1,0 +1,65 @@
+﻿@{
+    Page.Title = "上传视频";
+    Layout = "/Layout/_Layout1.cshtml";
+}
+
+<div style="padding-left:10px;">
+    @if (Session["CurrentUser"] != null)
+    {
+    <h2 style="margin-bottom:10px;">@Session["CurrentUser"].ToString() 正在上传视频</h2>
+    <p><input type="text" id="txt-title" name="title" placeholder="请输入视频标题" /></p>
+    <br />
+    <input type="file" id="videoFile" name="videoFile" accept="video/mp4">
+    <div class="progress">
+        <div></div>
+    </div>
+    <button id="btn-upload">上传</button>
+    <p id="msg"></p>
+    }
+    else
+    {
+        <p>请<a href="~/Login.cshtml">登录</a>您的账号。</p>
+    }
+</div>
+
+<script>
+    $("#btn-upload").click(function () {
+        var title = $('#txt-title').val();
+        if (title == '') {
+            alert('请输入视频标题');
+            return;
+        }
+        var file = $('#videoFile').get(0).files[0];
+        var formdata = new FormData();
+        formdata.append('videoFile', file);
+        formdata.append('title', title);
+        $.ajax({
+            url: 'Ashx//UploadVideo.ashx',
+            type: 'post',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            xhr: function () {
+                var xhr = new XMLHttpRequest();
+                //使用XMLHttpRequest.upload监听上传过程，注册progress事件，打印回调函数中的event事件
+                xhr.upload.addEventListener('progress', function (e) {
+                    console.log(e);
+                    //loaded代表上传了多少
+                    //total代表总数为多少
+                    var progressRate = (e.loaded / e.total) * 100 + '%';
+
+                    //通过设置进度条的宽度达到效果
+                    $('.progress > div').css('width', progressRate);
+                })
+
+                return xhr;
+            },
+            success: function (data) {
+                $('#msg').text(data).css('color', '#00ff00');
+            },
+            error: function () {
+                $('#msg').text('服务器错误').css('color', '#ff0000');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,24 @@
+﻿@using Jin.RazorWeb.DAL
+@using Jin.RazorWeb.Model
+@{
+    Page.Title = "首页";
+    Layout = "~/Layout/_Layout1.cshtml";
+}
+
+<div style="padding:20px;">
+    @{
+        List<Video> videos = VideoService.GetVideos();
+        foreach (Video video in videos)
+        {
+        <div>
+            <p><a href="~/VideoPlay.cshtml?id=@video.Id">@video.Title</a> <span style="color:#ff0000;float:right;">赞(@video.LikeCount)</span></p>
+            <a href="~/VideoPlay.cshtml?id=@video.Id">
+                <video controls="controls" style="width:200px;">
+                    <source src="@video.Url" type="video/mp4" />
+                </video>
+            </a>
+        </div>
+        <hr />
+        }
+    }
+</div>

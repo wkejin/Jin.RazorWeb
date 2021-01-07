@@ -1,0 +1,52 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 14px;
+}
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border:none;
+    border-bottom: 1px solid #eeeeee;
+    clear:both;
+}
+a {
+    text-decoration: none;
+    color:#0000ff;
+}
+table{
+    border:1px solid #ff0000;
+    margin-left:10px;
+}
+th, td {
+    border:1px solid #ff0000;
+    border-collapse:collapse;
+}
+
+.nav ul li {
+    list-style-type: none;
+    width:70px;
+    float:left;
+    font-size:16px;
+    font-weight:800;
+    text-align:center;
+}
+
+.progress {
+    width: 300px;
+    height: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px 0px;
+    overflow: hidden;
+}
+    /* 初始状态设置进度条宽度为0px */
+    .progress > div {
+        width: 0px;
+        height: 100%;
+        background-color: yellowgreen;
+        transition: all .3s ease;
+    }

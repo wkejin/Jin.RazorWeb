@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - Jin's ASP.NET Web Application</title>
+    <script src="../Scripts/jquery-3.5.1.js"></script>
+    <script>
+        $(function () {
+            $("#btn-submit").click(function () {
+                var username = $("#text-username").val();
+                var password = $("#text-password").val();
+                var confirmPassword = $("#text-confirm-password").val();
+                if (username == "" || password == "") {
+                    alert("请输入用户名或密码");
+                    return;
+                }
+                if (password != confirmPassword) {
+                    alert("两次输入密码不一致");
+                    return;
+                }
+                $.post("/Ashx/Reg.ashx",
+                    {
+                        username: username,
+                        password: password
+                    },
+                    function (data, status) {
+                        if (data == "注册成功") {
+                            alert(data);
+                            $(location).attr("href", "Login.cshtml");
+                        } else {
+                            alert(data);
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="reg">
+        <h1>用户注册</h1>
+        <p><input type="text" name="username" id="text-username" placeholder="请输入用户名" /></p>
+        <p><input type="password" name="password" id="text-password" placeholder="请输入密码" /></p>
+        <p><input type="password" name="password" id="text-confirm-password" placeholder="请确认密码" /></p>
+        <p><button id="btn-submit">提交</button></p>
+    </div>
+</body>
+</html>

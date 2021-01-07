@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/CSS/site.css" rel="stylesheet" />
+    <title>@Page.Title - Jin's ASP.NET Web Application</title>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div class="head">
+        @if (Session["CurrentUser"] != null)
+        {
+            string username = Session["CurrentUser"].ToString();
+            <div style="float:left;">
+                <img src="~/Upload/Images/HeadPhotos/0.jpg" alt="user photo" style="width:40px;float:left;" />
+                <a href="#" style="display:block;float:left;line-height:40px;margin-left:4px;font-size:20px;">@username</a>
+            </div>
+        }
+        <div style="float:right;padding-right:2px;">
+            <a href="../Login.cshtml" style="line-height:40px;">登录</a> <a href="../Reg.cshtml" style="line-height:40px;">注册</a>
+        </div>
+    </div>
+    <hr />
+    <div class="nav">
+        <ul>
+            <li><a href="~/Index.cshtml">首页</a></li>
+            <li><a href="#">文章</a></li>
+            <li><a href="#">视频</a></li>
+            <li><a href="#">图片</a></li>
+            <li><a href="~/UploadVideo.cshtml">上传</a></li>
+        </ul>
+    </div>
+    <hr />
+    @RenderBody()
+    <div class="foot">
+        &copy;Jin - ASP.NET Web Application - 2021
+    </div>
+</body>
+</html>
