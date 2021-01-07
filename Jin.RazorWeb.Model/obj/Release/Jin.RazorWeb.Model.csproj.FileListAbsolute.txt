@@ -1,0 +1,6 @@
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\bin\Release\Jin.RazorWeb.Model.dll
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\bin\Release\Jin.RazorWeb.Model.pdb
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Release\Jin.RazorWeb.Model.csproj.CoreCompileInputs.cache
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Release\Jin.RazorWeb.Model.dll
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Release\Jin.RazorWeb.Model.pdb
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Release\Jin.RazorWeb.Model.csprojAssemblyReference.cache

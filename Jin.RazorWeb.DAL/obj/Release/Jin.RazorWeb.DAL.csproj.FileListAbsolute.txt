@@ -1,0 +1,9 @@
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.DAL.dll
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.DAL.pdb
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.Model.dll
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.Model.pdb
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csprojAssemblyReference.cache
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csproj.CopyComplete
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.dll
+C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.pdb
