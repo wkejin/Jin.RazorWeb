@@ -9,6 +9,14 @@
 }
 
 <div>
+    @if (Session["CurrentUser"] != null)
+    {
+        <input type="hidden" id="currentUser" value="@Session["CurrentUser"].ToString()" />
+    }
+    else
+    {
+        <input type="hidden" id="currentUser" value="" />
+    }
     <div>
         <h2>@video.Title</h2>
         <input type="hidden" id="videoId" value="@video.Id" />
@@ -27,46 +35,60 @@
     <h4>所有评论</h4>
     <div id="comment-list">
         @*@if (comments.Count > 0)
-        {
-            foreach (VideoComment comment in comments)
             {
-                <div>
-                    <p style="font-size:12px">
-                        <a href="#">@comment.User</a> 
-                        <span style="color:#cccccc">@comment.CommentTime</span>
-                    </p>
-                    <p style="padding-left:4px">@comment.Content</p>
-                    <hr />
-                </div>
-            }
-        }*@
+                foreach (VideoComment comment in comments)
+                {
+                    <div>
+                        <p style="font-size:12px">
+                            <a href="#">@comment.User</a>
+                            <span style="color:#cccccc">@comment.CommentTime</span>
+                        </p>
+                        <p style="padding-left:4px">@comment.Content</p>
+                        <hr />
+                    </div>
+                }
+            }*@
     </div>
 </div>
 
 <script>
     loadComments();
-
     $('#btn-comment').click(function () {
+        if ($('#currentUser').val() == "") {
+            alert('请先登录账号');
+            return;
+        }
         var commentContent = $('#commentContent').val();
+        var videoId = $('#videoId').val();
         if (commentContent == "") {
             alert('请输入评论内容');
             return;
         }
-        $.post('Ashx//VideoComment.ashx', commentContent, function (data) {
-            
+        $.post('Ashx//VideoComments.ashx', {
+            videoId: videoId,
+            commentContent: commentContent,
+            act: 'create'
+        }, function (data) {
+            if (data == '评论成功') {
+                loadComments();
+                $('#commentContent').val('');
+            } else {
+                alert('评论失败,服务器错误');
+            }
         });
     });
 
     //加载评论的方法
     function loadComments() {
+        $('#comment-list').empty();
         var videoId = $('#videoId').val();
-        //$('#comment-list').empty();
-        $.get('Ashx//VideoComments.ashx?videoId=' + videoId, function (data) {
+        $.get('Ashx//VideoComments.ashx?act=get&videoId=' + videoId, function (data) {
             var comment_json = JSON.parse(data);
             $.each(comment_json, function (i, cmt) {
-                $('#comment-list').append('<div><p style="font-size:12px"><a href="#">' + cmt['User'] +
+                $('#comment-list').append('<div><p style="font-size:12px"><a href="#">' + cmt['CommentUser'] +
                     '</a> <span style="color:#cccccc">' + cmt['CommentTime'] +
-                    '</span></p><p style="padding-left:4px">' + cmt['Content'] + '</p></div><hr />');
+                    '</span></p><p style="padding-left:10px">' + cmt['Content'] + '</p></div><hr />')
+                    .css('background-color', '#fde4ff');
             });
         });
     }

@@ -89,6 +89,7 @@
     <Content Include="App_Data\JinRazorWeb_log.ldf">
       <DependentUpon>JinRazorWeb.mdf</DependentUpon>
     </Content>
+    <Content Include="Error.html" />
     <Content Include="Login.cshtml" />
     <Content Include="Reg.cshtml" />
     <Content Include="Ashx\Login.ashx" />

@@ -18,7 +18,7 @@ namespace Jin.RazorWeb.Model
         /// <summary>
         /// 评论用户
         /// </summary>
-        public string User { get; set; }
+        public string CommentUser { get; set; }
         /// <summary>
         /// 评论的视频Id
         /// </summary>

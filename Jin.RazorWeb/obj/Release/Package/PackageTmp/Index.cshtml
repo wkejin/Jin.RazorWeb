@@ -5,21 +5,20 @@
     Layout = "~/Layout/_Layout1.cshtml";
 }
 
-<div style="padding:2px;">
-    <h2>视频</h2>
+<div style="padding:20px;">
     @{
         List<Video> videos = VideoService.GetVideos();
         foreach (Video video in videos)
         {
-        <div style="margin-top:20px;">
-                <a href="~/VideoPlay.cshtml?id=@video.Id">
-                    <video controls="controls" style="width:320px;">
-                        <source src="@video.Url" type="video/mp4" />
-                    </video>
-                </a>
-            <p><span>@video.Title</span> <span style="color:#ff0000;">赞(@video.LikeCount)</span></p>
+        <div>
+            <p><a href="~/VideoPlay.cshtml?id=@video.Id">@video.Title</a> <span style="color:#ff0000;float:right;">赞(@video.LikeCount)</span></p>
+            <a href="~/VideoPlay.cshtml?id=@video.Id">
+                <video controls="controls" style="width:200px;">
+                    <source src="@video.Url" type="video/mp4" />
+                </video>
+            </a>
         </div>
+        <hr />
         }
     }
-    <div style="width:320px;"><a href="#" style="float:right;">更多...</a></div>
 </div>

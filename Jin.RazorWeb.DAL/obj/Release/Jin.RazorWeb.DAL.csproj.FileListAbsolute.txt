@@ -7,3 +7,12 @@ C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb
 C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csproj.CopyComplete
 C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.dll
 C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.pdb
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.DAL.dll
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.DAL.pdb
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.Model.dll
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\bin\Release\Jin.RazorWeb.Model.pdb
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csprojAssemblyReference.cache
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csproj.CoreCompileInputs.cache
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.csproj.CopyComplete
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.dll
+D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.DAL\obj\Release\Jin.RazorWeb.DAL.pdb

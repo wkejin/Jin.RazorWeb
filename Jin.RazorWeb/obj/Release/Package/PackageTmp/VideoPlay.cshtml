@@ -3,20 +3,95 @@
 @{
     int id = Convert.ToInt32(Request.QueryString["id"]);
     Video video = VideoService.GetVideo(id);
+    List<VideoComment> comments = VideoCommentService.GetVideoComments(id);
     Page.Title = video.Title;
     Layout = "~/Layout/_Layout1.cshtml";
 }
 
 <div>
+    @if (Session["CurrentUser"] != null)
+    {
+        <input type="hidden" id="currentUser" value="@Session["CurrentUser"].ToString()" />
+    }
+    else
+    {
+        <input type="hidden" id="currentUser" value="" />
+    }
     <div>
         <h2>@video.Title</h2>
+        <input type="hidden" id="videoId" value="@video.Id" />
         <p>上传：<a href="#">@video.UploadUser</a> <span>上传时间：@video.UploadTime.ToLongDateString()</span></p>
-        <video controls="controls" autoplay="autoplay">
+        <video controls="controls" autoplay="autoplay" width="280">
             <source src="@video.Url" type="video/mp4" />
         </video>
         <p><span style="color:#ff0000;">赞(@video.LikeCount)</span></p>
     </div>
-    <div class="comment-list">
-
+    <div>
+        <textarea style="width:280px;height:100px;" placeholder="输入你的评论，请文明用语" id="commentContent"></textarea>
+        <br />
+        <button id="btn-comment">提交评论</button>
+    </div>
+    <hr />
+    <h4>所有评论</h4>
+    <div id="comment-list">
+        @*@if (comments.Count > 0)
+            {
+                foreach (VideoComment comment in comments)
+                {
+                    <div>
+                        <p style="font-size:12px">
+                            <a href="#">@comment.User</a>
+                            <span style="color:#cccccc">@comment.CommentTime</span>
+                        </p>
+                        <p style="padding-left:4px">@comment.Content</p>
+                        <hr />
+                    </div>
+                }
+            }*@
     </div>
 </div>
+
+<script>
+    loadComments();
+    if ($('#comment-list').html() == "") {
+        $('#comment-list').append('<p style="padding-left:10px;font-size:12px;">没有评论。</p>');
+    }
+    $('#btn-comment').click(function () {
+        if ($('#currentUser').val() == "") {
+            alert('请先登录账号');
+            return;
+        }
+        var commentContent = $('#commentContent').val();
+        var videoId = $('#videoId').val();
+        if (commentContent == "") {
+            alert('请输入评论内容');
+            return;
+        }
+        $.post('Ashx//VideoComments.ashx', {
+            videoId: videoId,
+            commentContent: commentContent,
+            act: 'create'
+        }, function (data) {
+            if (data == '评论成功') {
+                loadComments();
+                $('#commentContent').val('');
+            } else {
+                alert('评论失败,服务器错误');
+            }
+        });
+    });
+
+    //加载评论的方法
+    function loadComments() {
+        $('#comment-list').empty();
+        var videoId = $('#videoId').val();
+        $.get('Ashx//VideoComments.ashx?act=get&videoId=' + videoId, function (data) {
+            var comment_json = JSON.parse(data);
+            $.each(comment_json, function (i, cmt) {
+                $('#comment-list').append('<div><p style="font-size:12px"><a href="#">' + cmt['CommentUser'] +
+                    '</a> <span style="color:#cccccc">' + cmt['CommentTime'] +
+                    '</span></p><p style="padding-left:10px">' + cmt['Content'] + '</p></div><hr />');
+            });
+        });
+    }
+</script>

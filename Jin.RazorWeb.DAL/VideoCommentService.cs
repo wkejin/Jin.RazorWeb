@@ -22,7 +22,7 @@ namespace Jin.RazorWeb.DAL
             {
                 Id = Convert.ToInt32(row["Id"]),
                 Content = row["Content"].ToString(),
-                User = row["User"].ToString(),
+                CommentUser = row["CommentUser"].ToString(),
                 VideoId = Convert.ToInt32(row["VideoId"]),
                 CommentTime = Convert.ToDateTime(row["CommentTime"])
             };
@@ -55,11 +55,11 @@ namespace Jin.RazorWeb.DAL
         /// <returns>返回true表示添加成功，false表示失败</returns>
         public static bool Create(VideoComment videoComment)
         {
-            string sqlStr = "insert into VideoComments(Content,User,VideoId,CommentTime) values(@Content,@User,@VideoId,@CommentTime)";
+            string sqlStr = "insert into VideoComments(Content,CommentUser,VideoId,CommentTime) values(@Content,@CommentUser,@VideoId,@CommentTime)";
             SqlParameter[] parameters =
             {
                 new SqlParameter("Content", videoComment.Content),
-                new SqlParameter("User", videoComment.User),
+                new SqlParameter("CommentUser", videoComment.CommentUser),
                 new SqlParameter("VideoId", videoComment.VideoId),
                 new SqlParameter("CommentTime", videoComment.CommentTime),
             };
