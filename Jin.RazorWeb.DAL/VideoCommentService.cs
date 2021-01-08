@@ -37,7 +37,7 @@ namespace Jin.RazorWeb.DAL
         public static List<VideoComment> GetVideoComments(int videoId)
         {
             List<VideoComment> videoComments = new List<VideoComment>();
-            string sqlStr = "select * from VideoComments where VideoId=@VideoId";
+            string sqlStr = "select * from VideoComments where VideoId=@VideoId order by CommentTime desc";
             SqlParameter parameter = new SqlParameter("VideoId", videoId);
             DataTable table = SqlHelper.GetDataTable(sqlStr, parameter);
             foreach (DataRow row in table.Rows)

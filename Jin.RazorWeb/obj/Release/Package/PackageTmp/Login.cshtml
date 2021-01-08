@@ -3,12 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/CSS/site.css" rel="stylesheet" />
     <title>登录 - Jin's ASP.NET Web Application</title>
-    <style>
-        input {
-            height:40px;
-        }
-    </style>
     <script src="../Scripts/jquery-3.5.1.js"></script>
     <script>
         $(function () {
@@ -29,12 +25,12 @@
                         password: password
                     },
                     function (data, status) {
-                    if (data == "登录成功") {
-                        $(location).attr("href", "Index.cshtml?username=" + username);
-                    } else {
-                        alert("登录失败，请检查用户名和密码");
-                    }
-                });
+                        if (data == "登录成功") {
+                            $(location).attr("href", "Index.cshtml?username=" + username);
+                        } else {
+                            alert("登录失败，请检查用户名和密码");
+                        }
+                    });
             });
         });
     </script>
@@ -44,7 +40,9 @@
         <h1>用户登录</h1>
         <p><input type="text" name="username" id="text-username" placeholder="输入用户名" /></p>
         <p><input type="password" name="password" id="text-password" placeholder="输入密码" /></p>
-        <p><button id="btn-login">登录</button></p>
+        <p><button id="btn-login">登录</button> 没有账号？<a href="~/Reg.cshtml">点击此处注册</a></p>
+        <br />
+        <p><a href="~/Index.cshtml">返回首页</a></p>
     </div>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/CSS/site.css" rel="stylesheet" />
     <title>注册 - Jin's ASP.NET Web Application</title>
     <script src="../Scripts/jquery-3.5.1.js"></script>
     <script>
@@ -43,7 +44,9 @@
         <p><input type="text" name="username" id="text-username" placeholder="请输入用户名" /></p>
         <p><input type="password" name="password" id="text-password" placeholder="请输入密码" /></p>
         <p><input type="password" name="password" id="text-confirm-password" placeholder="请确认密码" /></p>
-        <p><button id="btn-submit">提交</button></p>
+        <p><button id="btn-submit">提交</button> 已有账号？<a href="~/Login.cshtml">点击此处登录</a></p>
+        <br />
+        <p><a href="~/Index.cshtml">返回首页</a></p>
     </div>
 </body>
 </html>

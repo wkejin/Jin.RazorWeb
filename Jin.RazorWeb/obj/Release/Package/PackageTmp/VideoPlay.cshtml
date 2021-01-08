@@ -8,7 +8,7 @@
     Layout = "~/Layout/_Layout1.cshtml";
 }
 
-<div>
+<div style="margin-left:10px;">
     @if (Session["CurrentUser"] != null)
     {
         <input type="hidden" id="currentUser" value="@Session["CurrentUser"].ToString()" />
@@ -53,9 +53,6 @@
 
 <script>
     loadComments();
-    if ($('#comment-list').html() == "") {
-        $('#comment-list').append('<p style="padding-left:10px;font-size:12px;">没有评论。</p>');
-    }
     $('#btn-comment').click(function () {
         if ($('#currentUser').val() == "") {
             alert('请先登录账号');
@@ -90,7 +87,8 @@
             $.each(comment_json, function (i, cmt) {
                 $('#comment-list').append('<div><p style="font-size:12px"><a href="#">' + cmt['CommentUser'] +
                     '</a> <span style="color:#cccccc">' + cmt['CommentTime'] +
-                    '</span></p><p style="padding-left:10px">' + cmt['Content'] + '</p></div><hr />');
+                    '</span></p><p style="padding-left:10px">' + cmt['Content'] + '</p></div><hr />')
+                    .css('background-color', '#fde4ff');
             });
         });
     }

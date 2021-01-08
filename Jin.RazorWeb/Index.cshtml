@@ -11,7 +11,10 @@
         foreach (Video video in videos)
         {
         <div>
-            <p><a href="~/VideoPlay.cshtml?id=@video.Id">@video.Title</a> <span style="color:#ff0000;float:right;">赞(@video.LikeCount)</span></p>
+                <p>
+                    <a href="~/VideoPlay.cshtml?id=@video.Id" style="font-size:16px;font-weight:600;">@video.Title</a>
+                    <span style="color:#ff0000;float:right;">赞(@video.LikeCount)</span>
+                </p>
             <a href="~/VideoPlay.cshtml?id=@video.Id">
                 <video controls="controls" style="width:200px;">
                     <source src="@video.Url" type="video/mp4" />

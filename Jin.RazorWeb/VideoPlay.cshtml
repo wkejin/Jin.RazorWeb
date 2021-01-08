@@ -8,7 +8,7 @@
     Layout = "~/Layout/_Layout1.cshtml";
 }
 
-<div>
+<div style="margin-left:10px;">
     @if (Session["CurrentUser"] != null)
     {
         <input type="hidden" id="currentUser" value="@Session["CurrentUser"].ToString()" />

@@ -32,13 +32,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/07/2021 15:56:41</publishTime>
     </File>
     <File Include="bin/Jin.RazorWeb.DAL.dll">
-      <publishTime>01/08/2021 15:23:03</publishTime>
+      <publishTime>01/08/2021 16:11:49</publishTime>
     </File>
     <File Include="bin/Jin.RazorWeb.DAL.pdb">
-      <publishTime>01/08/2021 15:23:03</publishTime>
+      <publishTime>01/08/2021 16:11:49</publishTime>
     </File>
     <File Include="bin/Jin.RazorWeb.dll">
-      <publishTime>01/08/2021 15:23:04</publishTime>
+      <publishTime>01/08/2021 16:11:50</publishTime>
     </File>
     <File Include="bin/Jin.RazorWeb.Model.dll">
       <publishTime>01/08/2021 15:23:03</publishTime>
@@ -47,7 +47,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/08/2021 15:23:03</publishTime>
     </File>
     <File Include="bin/Jin.RazorWeb.pdb">
-      <publishTime>01/08/2021 15:23:04</publishTime>
+      <publishTime>01/08/2021 16:11:50</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>07/08/2020 21:52:58</publishTime>
@@ -248,19 +248,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/29/2018 13:29:50</publishTime>
     </File>
     <File Include="CSS/site.css">
-      <publishTime>01/05/2021 15:23:16</publishTime>
+      <publishTime>01/08/2021 16:02:04</publishTime>
+    </File>
+    <File Include="Error.html">
+      <publishTime>01/08/2021 15:30:32</publishTime>
     </File>
     <File Include="Index.cshtml">
-      <publishTime>01/07/2021 17:45:38</publishTime>
+      <publishTime>01/08/2021 16:20:13</publishTime>
     </File>
     <File Include="Layout/_Layout1.cshtml">
       <publishTime>01/07/2021 17:44:36</publishTime>
     </File>
     <File Include="Login.cshtml">
-      <publishTime>01/04/2021 18:28:40</publishTime>
+      <publishTime>01/08/2021 15:57:44</publishTime>
     </File>
     <File Include="Reg.cshtml">
-      <publishTime>01/04/2021 18:25:41</publishTime>
+      <publishTime>01/08/2021 15:57:59</publishTime>
     </File>
     <File Include="Scripts/jquery-3.5.1.js">
       <publishTime>01/04/2021 12:45:33</publishTime>
@@ -296,7 +299,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/05/2021 13:19:57</publishTime>
     </File>
     <File Include="VideoPlay.cshtml">
-      <publishTime>01/08/2021 15:41:49</publishTime>
+      <publishTime>01/08/2021 15:49:43</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>01/08/2021 15:23:04</publishTime>
