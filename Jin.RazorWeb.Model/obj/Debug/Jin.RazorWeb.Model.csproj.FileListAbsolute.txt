@@ -6,7 +6,6 @@ C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Debug\Jin.RazorWeb
 C:\Users\Jin\source\repos\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Debug\Jin.RazorWeb.Model.csprojAssemblyReference.cache
 D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.Model\bin\Debug\Jin.RazorWeb.Model.dll
 D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.Model\bin\Debug\Jin.RazorWeb.Model.pdb
-D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Debug\Jin.RazorWeb.Model.csprojAssemblyReference.cache
 D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Debug\Jin.RazorWeb.Model.csproj.CoreCompileInputs.cache
 D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Debug\Jin.RazorWeb.Model.dll
 D:\OneDrive\Code\wkejin\Jin.RazorWeb\Jin.RazorWeb.Model\obj\Debug\Jin.RazorWeb.Model.pdb

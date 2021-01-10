@@ -18,7 +18,7 @@ namespace Jin.RazorWeb.Model
         /// <summary>
         /// 回复用户
         /// </summary>
-        public string User { get; set; }
+        public string ReplyUser { get; set; }
         /// <summary>
         /// 回复的评论的用户
         /// </summary>

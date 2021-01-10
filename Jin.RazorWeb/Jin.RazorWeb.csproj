@@ -95,6 +95,7 @@
     <Content Include="Ashx\Login.ashx" />
     <Content Include="Ashx\Reg.ashx" />
     <Content Include="Ashx\VideoComments.ashx" />
+    <Content Include="Ashx\VideoCommentReply.ashx" />
     <None Include="Properties\PublishProfiles\Jin.RazorWeb.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="CSS\site.css" />
@@ -112,6 +113,9 @@
     </Compile>
     <Compile Include="Ashx\Reg.ashx.cs">
       <DependentUpon>Reg.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ashx\VideoCommentReply.ashx.cs">
+      <DependentUpon>VideoCommentReply.ashx</DependentUpon>
     </Compile>
     <Compile Include="Ashx\VideoComments.ashx.cs">
       <DependentUpon>VideoComments.ashx</DependentUpon>
