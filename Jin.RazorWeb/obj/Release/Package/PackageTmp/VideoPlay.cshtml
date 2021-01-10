@@ -85,10 +85,68 @@
         $.get('Ashx//VideoComments.ashx?act=get&videoId=' + videoId, function (data) {
             var comment_json = JSON.parse(data);
             $.each(comment_json, function (i, cmt) {
-                $('#comment-list').append('<div><p style="font-size:12px"><a href="#">' + cmt['CommentUser'] +
-                    '</a> <span style="color:#cccccc">' + cmt['CommentTime'] +
-                    '</span></p><p style="padding-left:10px">' + cmt['Content'] + '</p></div><hr />')
-                    .css('background-color', '#fde4ff');
+                $('#comment-list').append('<div id="comment' + cmt['Id'] + '"><p><a href="#">' + cmt['CommentUser'] +
+                    '</a></p><p style="padding-left:10px">' + cmt['Content'] +
+                    '</p><p> <span style="color:#cccccc">' + cmt['CommentTime'] +
+                    '</span> <span id="' + cmt['Id'] + '" cmtuser="' + cmt["CommentUser"] +
+                    '" currentuser="' + $('#currentUser').val() +
+                    '" style="color:#0000ff;cursor:pointer;width:auto;height:auto;" onclick="reply(' +
+                    cmt['Id'] + ')">回复</span></p></div><hr />').css('background-color', '#fde4ff');
+                loadReply(cmt["Id"]);
+            });
+        });
+    }
+    //回复
+    function reply(cmtId) {
+        if ($('#currentUser').val() == '') {
+            alert('请先登录账号');
+            return;
+        }
+        var cmtUser = $('#' + cmtId).attr('cmtuser');
+        var currentUser = $('#' + cmtId).attr('currentuser');
+        if (cmtUser === currentUser) {
+            alert('你不能回复自己');
+            return;
+        }
+        var replyDiv = $('<div></div>');
+        var textArea = $('<textarea placeholder="输入回复内容，请文明用语"></textarea>');
+        var btnReply = $('<span>提交回复</span>');
+        replyDiv.css('padding-left', '20px');
+        textArea.css('width', '280px').css('height', '100px');
+        btnReply.css('cursor', 'pointer').css('color','#0000ff');
+        replyDiv.append(textArea).append(btnReply);
+        $('#comment' + cmtId).append(replyDiv);
+        replyDiv.css('display', 'block');
+        btnReply.click(function () {
+            if (textArea.val() == '') {
+                alert('请输入回复内容');
+                return;
+            }
+            var replyContent = textArea.val();
+            $.post('Ashx//VideoCommentReply.ashx',
+                {
+                    commentId: cmtId,
+                    commentUser: cmtUser,
+                    replyContent: replyContent,
+                    act: 'create'
+                }, function (data) {
+                    if (data == "回复成功") {
+                        replyDiv.css('display', 'none');
+                        loadReply(cmtId);
+                    }
+                });
+        });
+    }
+    //加载回复
+    function loadReply(cmtId) {
+        $.get('Ashx//VideoCommentReply.ashx?act=get&commentId=' + cmtId, function (data) {
+            var json_replies = JSON.parse(data);
+            $.each(json_replies, function (i, reply) {
+                $('#comment' + cmtId).append('<div><p style="padding-left:20px;"><a href="#">' + reply['ReplyUser'] +
+                    '</a>回复<a href="#">' + reply['ToUser'] + '</a>: ' + reply['Content'] +
+                    '</p><p style="padding-left:20px;font-size:12px;"><span style="color:#cccccc;">' + reply['ReplyTime'] +
+                    '</span> <span style="color:#0000ff;cursor:pointer;width:auto;height:auto;" onclick="reply(' +
+                    cmtId + ')">回复</span></p></div>');
             });
         });
     }
