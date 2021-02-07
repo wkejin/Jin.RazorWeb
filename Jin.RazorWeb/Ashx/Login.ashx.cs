@@ -21,7 +21,7 @@ namespace Jin.RazorWeb.Ashx
             string password = context.Request["password"].ToString();
             if(UserService.CheckLogin(username, password))
             {
-                context.Session.Timeout = 60;
+                context.Session.Timeout = 120;
                 context.Session["CurrentUser"] = username;
                 context.Response.Write("登录成功");
             }

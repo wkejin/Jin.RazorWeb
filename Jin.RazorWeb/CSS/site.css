@@ -5,18 +5,18 @@
 
 body {
     font-size: 14px;
-    background-color: #fff9cf;
+    background-color: #fff7e2;
 }
 hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border:none;
-    border-bottom: 1px solid #eeeeee;
-    clear:both;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #ff9f00;
+    clear: both;
 }
 a {
     text-decoration: none;
-    color:#0000ff;
+    color:#ff6a00;
 }
 
 input[type=text], input[type=password] {
@@ -45,6 +45,10 @@ button {
     margin-top:10px;
 }
 
+.piclist img {
+    width: 280px;
+}
+
 .progress {
     width: 300px;
     height: 10px;
@@ -60,3 +64,8 @@ button {
         background-color: yellowgreen;
         transition: all .3s ease;
     }
+
+.foot {
+    clear:both;
+    margin-top: 10px;
+}

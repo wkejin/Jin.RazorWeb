@@ -1,0 +1,35 @@
+﻿@using Jin.RazorWeb.DAL;
+@using Jin.RazorWeb.Model;
+@{
+    Page.Title = "浏览文章";
+    Layout = "Layout/_Layout1.cshtml";
+}
+
+<div>
+    @if (Request.QueryString["id"] != null)
+    {
+        int articleId = Convert.ToInt32(Request.QueryString["id"]);
+        ArticleService.IncreaseViewCount(articleId);
+        Article article = ArticleService.GetArticle(articleId);
+        <div id="article">
+            <input type="hidden" id="articleId" value="@Request.QueryString["id"].ToString()" />
+            <h1>@article.Title</h1>
+            <p style="color:#bbbbbb;">作者：<span>@article.Author</span> 时间：<span>@article.CreateTime</span> 浏览<span>(@article.ViewCount)</span></p>
+            <article style="background-color:#ffffff">@Html.Raw(article.Content)</article>
+        </div>
+        <hr />
+        <div>
+            <p><textarea style="width:300px;height:100px;"></textarea></p>
+            <p><button>提交评论</button></p>
+        </div>
+        <div id="comment-list">
+        </div>
+    }
+    else
+    {
+        <h1>错误，非法进入此页面</h1>
+    }
+</div>
+<script>
+    
+</script>

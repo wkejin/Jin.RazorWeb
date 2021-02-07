@@ -1,0 +1,35 @@
+﻿@using Jin.RazorWeb.Model;
+@using Jin.RazorWeb.DAL;
+@{
+    Page.Title = "文章列表";
+    Layout = "Layout/_Layout1.cshtml";
+}
+
+<div id="articlelist">
+    @{ 
+        List<Article> articles = ArticleService.GetArticles();
+        foreach (var article in articles)
+        {
+            <div style="margin:10px 4px 0 4px;background-color:#ffffff;">
+                <h3><a href="~/ArticleDetail.cshtml?id=@article.Id">@article.Title</a></h3>
+                <article id="article">
+                    @Html.Raw(article.Content.Substring(0, 180) + "......<a href='ArticleDetail.cshtml?id=" + article.Id + "'>查看全文</a>")
+                </article>
+                <p style="color:#aaaaaa;">@article.CreateTime.ToLongDateString() 浏览(@article.ViewCount)</p>
+            </div>
+        }
+    }
+</div>
+<script>
+    //$(function () {
+    //    $.get('Ashx/GetArticles.ashx', function (data) {
+    //        var articles = JSON.parse(data);
+    //        $.each(articles, function (i, article) {
+    //            $('#articlelist').append('<div style="letter-spacing:1px;padding:4px;background-color:#ffffff;margin-top:10px;"><h4><a href="ArticleDetail.cshtml?id=' +
+    //                article['Id'] + '">' + article['Title'] + '</a></h4><article>' + article['Content'].substr(0, 120) +
+    //                '</article><p style="color:#bbbbbb;font-size:12px">发布时间：<span>' + article['CreateTime'] +
+    //                '</span> 浏览数：<span>' + article['ViewCount'] + '</span></p>');
+    //        });
+    //    });
+    //});
+</script>

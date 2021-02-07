@@ -27,7 +27,7 @@ namespace Jin.RazorWeb.Ashx
                 string uploadUser = context.Session["CurrentUser"].ToString();
                 Video video = new Video()
                 {
-                    Url = "Upload/Videos/" + videoName,
+                    Url = "Upload//Videos//" + videoName,
                     Title = title,
                     UploadUser = uploadUser,
                     UploadTime = uploadTime,

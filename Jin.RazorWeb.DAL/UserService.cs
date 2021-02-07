@@ -40,15 +40,8 @@ namespace Jin.RazorWeb.DAL
                 new SqlParameter("@UserName", username),
                 new SqlParameter("@Password", password)
             };
-            int result = SqlHelper.ExecuteNonQuery(sqlStr, parameters);
-            if (result <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            bool res = SqlHelper.ExecuteNonQuery(sqlStr, parameters) >= 1 ? true : false;
+            return res;
         }
 
         /// <summary>
@@ -60,15 +53,8 @@ namespace Jin.RazorWeb.DAL
         {
             string sqlStr = "delete from Users where Id=@Id";
             SqlParameter parameter = new SqlParameter("Id", id);
-            int result = SqlHelper.ExecuteNonQuery(sqlStr);
-            if (result <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            bool res = SqlHelper.ExecuteNonQuery(sqlStr) >= 1 ? true : false;
+            return res;
         }
 
         /// <summary>
@@ -106,7 +92,7 @@ namespace Jin.RazorWeb.DAL
                 new SqlParameter("Password", password)
             };
             int result = Convert.ToInt32(SqlHelper.ExecuteScalar(sqlStr, parameters));
-            if (result == 1)
+            if (result >= 1)
             {
                 return true;
             }
@@ -131,6 +117,31 @@ namespace Jin.RazorWeb.DAL
                 users.Add(user);
             }
             return users;
+        }
+
+        /// <summary>
+        /// 更新用户头像信息
+        /// </summary>
+        /// <param name="url">头像地址</param>
+        /// <returns>返回true表示更新成功，false表示失败</returns>
+        public static bool UpdateHeadPhoto(string url)
+        {
+            string sqlStr = "update Users set HeadPhotoUrl=@HeadPhotoUrl";
+            SqlParameter parameter = new SqlParameter("HeadPhotoUrl", url);
+            bool res = SqlHelper.ExecuteNonQuery(sqlStr, parameter) >= 1 ? true : false;
+            return res;
+        }
+
+        /// <summary>
+        /// 根据用户名查找用户头像
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <returns></returns>
+        public static string GetHeadPhoto(string username)
+        {
+            string sqlStr = "select HeadPhoto from Users where UserName=@UserName";
+            SqlParameter parameter = new SqlParameter("UserName", username);
+            return SqlHelper.ExecuteScalar(sqlStr, parameter).ToString();
         }
     }
 }

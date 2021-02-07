@@ -21,13 +21,14 @@ namespace Jin.RazorWeb.DAL
                 UploadUser = row["UploadUser"].ToString(),
                 UploadTime = Convert.ToDateTime(row["UploadTime"]),
                 Description = row["Description"].ToString(),
-                LikeCount = Convert.ToInt32(row["LikeCount"])
+                LikeCount = Convert.ToInt32(row["LikeCount"]),
+                PlayCount = Convert.ToInt32(row["PlayCount"])
             };
             return video;
         }
         public static List<Video> GetVideos()
         {
-            string sqlStr = "select * from Videos";
+            string sqlStr = "select * from Videos order by UploadTime desc";
             DataTable table = SqlHelper.GetDataTable(sqlStr);
             List<Video> videos = new List<Video>();
             foreach (DataRow row in table.Rows)
@@ -67,15 +68,34 @@ namespace Jin.RazorWeb.DAL
                 new SqlParameter("UploadUser", video.UploadUser),
                 new SqlParameter("UploadTime", video.UploadTime)
             };
-            int result = SqlHelper.ExecuteNonQuery(sqlStr, parameters);
-            if(result >= 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            bool res = SqlHelper.ExecuteNonQuery(sqlStr, parameters) >= 1 ? true : false;
+            return res;
+        }
+
+        /// <summary>
+        /// 播放数+1
+        /// </summary>
+        /// <param name="id">视频id</param>
+        /// <returns></returns>
+        public static bool IncreaseViewCount(int id)
+        {
+            string sqlStr = "update Videos set PlayCount=PlayCount+1 where Id=@Id";
+            SqlParameter parameter = new SqlParameter("Id", id);
+            bool res = SqlHelper.ExecuteNonQuery(sqlStr, parameter) >= 1 ? true : false;
+            return res;
+        }
+
+        /// <summary>
+        /// 点赞数+1
+        /// </summary>
+        /// <param name="id">视频id</param>
+        /// <returns></returns>
+        public static bool IncreaseLikeCount(int id)
+        {
+            string sqlStr = "update Videos set LikeCount=LikeCount+1 where Id=@Id";
+            SqlParameter parameter = new SqlParameter("Id", id);
+            bool res = SqlHelper.ExecuteNonQuery(sqlStr, parameter) >= 1 ? true : false;
+            return res;
         }
     }
 }

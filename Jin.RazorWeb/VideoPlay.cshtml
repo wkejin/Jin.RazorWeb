@@ -2,13 +2,14 @@
 @using Jin.RazorWeb.DAL
 @{
     int id = Convert.ToInt32(Request.QueryString["id"]);
+    VideoService.IncreaseViewCount(id);
     Video video = VideoService.GetVideo(id);
     List<VideoComment> comments = VideoCommentService.GetVideoComments(id);
     Page.Title = video.Title;
     Layout = "~/Layout/_Layout1.cshtml";
 }
 
-<div style="margin-left:10px;">
+<div style="margin-left:2px;">
     @if (Session["CurrentUser"] != null)
     {
         <input type="hidden" id="currentUser" value="@Session["CurrentUser"].ToString()" />
@@ -20,11 +21,14 @@
     <div>
         <h2>@video.Title</h2>
         <input type="hidden" id="videoId" value="@video.Id" />
-        <p>上传：<a href="#">@video.UploadUser</a> <span>上传时间：@video.UploadTime.ToLongDateString()</span></p>
+        <p style="color:#aaaaaa;font-size:12px;">上传：<a href="#">@video.UploadUser</a> <span>上传时间：@video.UploadTime.ToLongDateString()</span> <span>播放：@video.PlayCount</span></p>
+        <hr />
         <video controls="controls" autoplay="autoplay" width="280">
             <source src="@video.Url" type="video/mp4" />
         </video>
-        <p><span style="color:#ff0000;">赞(@video.LikeCount)</span></p>
+        <p style="text-align:right;">
+            <span style="color:#ff006e;cursor:pointer;font-weight:900;font-size:16px;" id="likedCount">赞[@video.LikeCount]</span>
+        </p>
     </div>
     <div>
         <textarea style="width:280px;height:100px;" placeholder="输入你的评论，请文明用语" id="commentContent"></textarea>
@@ -32,27 +36,14 @@
         <button id="btn-comment">提交评论</button>
     </div>
     <hr />
-    <h4>所有评论</h4>
+    <h4>@comments.Count 条评论</h4>
     <div id="comment-list">
-        @*@if (comments.Count > 0)
-            {
-                foreach (VideoComment comment in comments)
-                {
-                    <div>
-                        <p style="font-size:12px">
-                            <a href="#">@comment.User</a>
-                            <span style="color:#cccccc">@comment.CommentTime</span>
-                        </p>
-                        <p style="padding-left:4px">@comment.Content</p>
-                        <hr />
-                    </div>
-                }
-            }*@
     </div>
 </div>
 
 <script>
     loadComments();
+
     $('#btn-comment').click(function () {
         if ($('#currentUser').val() == "") {
             alert('请先登录账号');
@@ -78,6 +69,16 @@
         });
     });
 
+    $('#likedCount').click(function () {
+        $.post('Ashx//IncreaseLikeCount.ashx', { id: $('#videoId').val() }, function (data) {
+            if (data === 'ok') {
+            } else {
+                alert('服务器错误');
+                return;
+            }
+        });
+    });
+
     //加载评论的方法
     function loadComments() {
         $('#comment-list').empty();
@@ -87,33 +88,34 @@
             $.each(comment_json, function (i, cmt) {
                 $('#comment-list').append('<div id="comment' + cmt['Id'] + '"><p><a href="#">' + cmt['CommentUser'] +
                     '</a></p><p style="padding-left:10px">' + cmt['Content'] +
-                    '</p><p> <span style="color:#cccccc">' + cmt['CommentTime'] +
-                    '</span> <span id="' + cmt['Id'] + '" cmtuser="' + cmt["CommentUser"] +
+                    '</p><p> <span style="color:#bbbbbb">' + cmt['CommentTime'] +
+                    '</span> <span id="cmt' + cmt['Id'] + '" cmtuser="' + cmt["CommentUser"] +
                     '" currentuser="' + $('#currentUser').val() +
-                    '" style="color:#0000ff;cursor:pointer;width:auto;height:auto;">回复</span></p></div><hr />').css('background-color', '#fde4ff');
+                    '" style="color:#ff6a00;cursor:pointer;width:auto;height:auto;">回复</span></p></div><hr />').css('background-color', '#f6def7');
                 loadReply(cmt["Id"]);
-                $('#' + cmt['Id']).click(function () {
+                $('#cmt' + cmt['Id']).click(function () {
                     replyToComment(cmt["Id"]);
                 });
             });
         });
     }
-    //回复评论
+    //回复用户的评论
     function replyToComment(cmtId) {
         if ($('#currentUser').val() == '') {
             alert('请先登录账号');
             return;
         }
-        var cmtUser = $('#' + cmtId).attr('cmtuser');
+        var cmtUser = $('#cmt' + cmtId).attr('cmtuser');
         var replyDiv = $('<div></div>');
         var textArea = $('<textarea placeholder="回复' + cmtUser + '"></textarea>');
-        var btnReply = $('<span>提交回复</span>');
+        var btnReply = $('<span>提交</span>');
         replyDiv.css('padding-left', '20px');
         textArea.css('width', '280px').css('height', '100px');
-        btnReply.css('cursor', 'pointer').css('color','#0000ff');
+        btnReply.css('cursor', 'pointer').css('color','#ff6a00');
         replyDiv.append(textArea).append(btnReply);
         $('#comment' + cmtId).append(replyDiv);
         replyDiv.css('display', 'block');
+        textArea.focus();
         btnReply.click(function () {
             if (textArea.val() == '') {
                 alert('请输入回复内容');
@@ -135,7 +137,7 @@
                 });
         });
     }
-    //回复回复
+    //回复用户的回复
     function replyToReply(cmtId, replyUser) {
         if ($('#currentUser').val() == '') {
             alert('请先登录账号');
@@ -143,13 +145,14 @@
         }
         var replyDiv = $('<div></div>');
         var textArea = $('<textarea placeholder="回复' + replyUser + '"></textarea>');
-        var btnReply = $('<span>提交回复</span>');
+        var btnReply = $('<span>提交</span>');
         replyDiv.css('padding-left', '20px');
         textArea.css('width', '280px').css('height', '100px');
-        btnReply.css('cursor', 'pointer').css('color', '#0000ff');
+        btnReply.css('cursor', 'pointer').css('color', '#ff6a00');
         replyDiv.append(textArea).append(btnReply);
         $('#comment' + cmtId).append(replyDiv);
         replyDiv.css('display', 'block');
+        textArea.focus();
         btnReply.click(function () {
             if (textArea.val() == '') {
                 alert('请输入回复内容');
@@ -179,9 +182,9 @@
             $.each(json_replies, function (i, reply) {
                 $('#comment' + cmtId).append('<div class="reply' + reply['ReplyUser'] + '"><p style="padding-left:20px;"><a href="#">' +
                     reply['ReplyUser'] + '</a>回复<a href="#">' + reply['ToUser'] + '</a>: ' + reply['Content'] +
-                    '</p><p style="padding-left:20px;font-size:12px;"><span style="color:#cccccc;">' + reply['ReplyTime'] +
-                    '</span> <span id="' + reply['Id'] + '" replyuser="' + reply['ReplyUser'] + '" style="color:#0000ff;cursor:pointer;width:auto;height:auto;">回复</span></p></div>');
-                $('#' + reply['Id']).click(function () {
+                    '</p><p style="padding-left:20px;margin-bottom:4px;"><span style="color:#bbbbbb;">' + reply['ReplyTime'] +
+                    '</span> <span id="reply' + reply['Id'] + '" replyuser="' + reply['ReplyUser'] + '" style="color:#ff6a00;cursor:pointer;width:auto;height:auto;">回复</span></p></div>');
+                $('#reply' + reply['Id']).click(function () {
                     replyToReply(cmtId, reply['ReplyUser']);
                 });
             });

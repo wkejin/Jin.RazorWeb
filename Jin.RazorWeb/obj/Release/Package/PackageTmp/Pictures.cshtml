@@ -1,0 +1,17 @@
+﻿@using Jin.RazorWeb.Model;
+@using Jin.RazorWeb.DAL;
+@{
+    Page.Title = "图片";
+    Layout = "_Layout1.cshtml";
+    List<Picture> pictures = PictureService.GetPictures();
+}
+
+<div class="piclist">
+    <p>提示：点击图片可查看原图</p>
+    <ul>
+        @foreach (var pic in pictures)
+        {
+            <li><a href="ShowPicture.cshtml?id=@pic.Id"><img src="@pic.Url" alt="@pic.Title" /></a></li>
+        }
+    </ul>
+</div>

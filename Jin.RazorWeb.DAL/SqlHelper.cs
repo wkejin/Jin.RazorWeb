@@ -4,8 +4,9 @@ using System.Data.SqlClient;
 
 namespace Jin.RazorWeb.DAL
 {
-    internal class SqlHelper
+    public class SqlHelper
     {
+        //连接字符串
         private static readonly string connectionString = ConfigurationManager.ConnectionStrings["mssqlserver"].ConnectionString;
 
         /// <summary>

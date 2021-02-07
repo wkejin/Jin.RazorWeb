@@ -1,0 +1,16 @@
+﻿@using Jin.RazorWeb.DAL;
+@using Jin.RazorWeb.Model;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>查看原图</title>
+</head>
+<body>
+    <div>
+        @{ 
+            Picture pic = PictureService.GetPicture(Convert.ToInt32(Request.QueryString["id"]));
+        }
+        <img src="@pic.Url" alt="@pic.Title" />
+    </div>
+</body>
+</html>

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Album.cs" />
+    <Compile Include="Article.cs" />
+    <Compile Include="Picture.cs" />
     <Compile Include="VideoComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reply.cs" />

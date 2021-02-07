@@ -36,6 +36,10 @@ namespace Jin.RazorWeb.DAL
         /// </summary>
         public string Description { get; set; }
         /// <summary>
+        /// 播放数
+        /// </summary>
+        public int PlayCount { get; set; }
+        /// <summary>
         /// 点赞数
         /// </summary>
         public int LikeCount { get; set; }

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑文章</title>
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/ueditor/ueditor.config.js"></script>
+    <script src="~/ueditor/ueditor.all.js"></script>
+    <script src="~/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="~/Scripts/uefuc.js"></script>
+    <style>
+        #txt-title {
+            width: 240px;
+        }
+
+        #txtEditor {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    @if (Session["CurrentUser"] == null)
+    {
+        <div><h3>请先<a href="~/Login.cshtml">登录</a>账号。</h3></div>
+    }
+    else
+    {
+        <div>
+            <p><input type="text" id="txt-title" placeholder="输入文章标题" /> <button id="btn-submit">提交</button></p>
+            <p>输入文章内容：</p>
+            <textarea id="txtEditor"></textarea>
+        </div>
+    }
+    <script>
+        var ue = new baidu.editor.ui.Editor();
+        ue.render('txtEditor');
+
+        $('#btn-submit').click(function () {
+            var title = $('#txt-title').val();
+            var content = encodeURI(ue.getContent());
+            if (title == '') {
+                alert('请填写文章标题');
+                return;
+            }
+            if (content == '') {
+                alert('请填写文章内容');
+                return;
+            }
+            $.post('Ashx/CreateUpdateArticle.ashx', { act: 'create', articleTitle: title, articleContent: content }, function (data) {
+                if (data === 'ok') {
+                    alert('文章发布成功');
+                } else {
+                    alert('文章发布失败');
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

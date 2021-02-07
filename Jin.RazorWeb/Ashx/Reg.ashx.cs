@@ -18,6 +18,13 @@ namespace Jin.RazorWeb.Ashx
 
             string username = context.Request["username"].ToString();
             string password = context.Request["password"].ToString();
+
+            if(UserService.IsExisted(username))
+            {
+                context.Response.Write("该用户名已经存在");
+                return;
+            }
+
             if(UserService.Create(username, password))
             {
                 context.Response.Write("注册成功");

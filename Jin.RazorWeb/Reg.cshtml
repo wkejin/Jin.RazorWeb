@@ -20,12 +20,12 @@
                     alert("两次输入密码不一致");
                     return;
                 }
-                $.post("/Ashx/Reg.ashx",
+                $.post("Ashx//Reg.ashx",
                     {
                         username: username,
                         password: password
                     },
-                    function (data, status) {
+                    function (data) {
                         if (data == "注册成功") {
                             alert(data);
                             $(location).attr("href", "Login.cshtml");

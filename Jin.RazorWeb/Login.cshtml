@@ -26,7 +26,7 @@
                     },
                     function (data, status) {
                         if (data == "登录成功") {
-                            $(location).attr("href", "Index.cshtml?username=" + username);
+                            window.location.href = 'Index.cshtml';
                         } else {
                             alert("登录失败，请检查用户名和密码");
                         }
