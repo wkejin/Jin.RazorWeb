@@ -26,8 +26,9 @@
         <video controls="controls" autoplay="autoplay" width="280">
             <source src="@video.Url" type="video/mp4" />
         </video>
-        <p style="text-align:right;">
-            <span style="color:#ff006e;cursor:pointer;font-weight:900;font-size:16px;" id="likedCount">赞[@video.LikeCount]</span>
+        <p>
+            <span id="like" style="color:#ff006e;cursor:pointer;font-weight:900;font-size:16px;">赞</span>
+            <span id="likedCount">@video.LikeCount</span>
         </p>
     </div>
     <div>
@@ -37,8 +38,7 @@
     </div>
     <hr />
     <h4>@comments.Count 条评论</h4>
-    <div id="comment-list">
-    </div>
+    <div id="comment-list"></div>
 </div>
 
 <script>
@@ -69,9 +69,12 @@
         });
     });
 
-    $('#likedCount').click(function () {
+    $('#like').click(function () {
         $.post('Ashx//IncreaseLikeCount.ashx', { id: $('#videoId').val() }, function (data) {
-            if (data === 'ok') {
+            if (data == 'ok') {
+                var likedCount = parseInt($('#likedCount').text());
+                likedCount++;
+                $('#likedCount').text(likedCount);
             } else {
                 alert('服务器错误');
                 return;
